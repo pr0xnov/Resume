@@ -55,7 +55,7 @@ body {
   font-weight: 700;
   line-height: 24px;
   display: inline-block;
-    width: 55px;
+  width: 80px;
   color: #fff;
   margin-right: 10px;
 }
@@ -122,9 +122,10 @@ body {
 }
 
 .name {
-  font-size: 45px;
+  font-size: clamp(26px, 3.6vw, 45px);
   font-weight: 700;
   line-height: 89px;
+  white-space: nowrap;
 }
 .description {
   font-size: 14px;
@@ -143,19 +144,6 @@ body {
   font-weight: 700;
   line-height: 24px;
   margin-bottom: 20px;
-}
-.projects-link {
-  color: #595959;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 24px;
-}
-.project-item {
-  font-weight: 700;
-  margin-left: 17px;
-}
-.project-container {
-  margin-bottom: 55px;
 }
 
 .proffesion-title {
@@ -190,3 +178,227 @@ body {
   font-size:14px;
   font-weight:400;
   line-height:24px;
+}
+
+/* Language switcher */
+
+.lang-switcher {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  max-width: 1200px;
+  margin: -24px auto 16px;
+}
+.lang-btn {
+  font-family: Montserrat, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 7px 12px;
+  border: 1px solid #1e3739;
+  border-radius: 4px;
+  background: #fff;
+  color: #1e3739;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.lang-btn:hover {
+  background: #e3ebeb;
+}
+.lang-btn.is-active {
+  background: #1e3739;
+  color: #15e978;
+}
+.lang-btn:focus-visible {
+  outline: 2px solid #15e978;
+  outline-offset: 2px;
+}
+.pdf-btn {
+  font-family: Montserrat, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 7px 14px;
+  margin-left: 10px;
+  border: 1px solid #15e978;
+  border-radius: 4px;
+  background: #15e978;
+  color: #1e3739;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: opacity 0.2s;
+}
+.pdf-btn:hover {
+  opacity: 0.85;
+}
+.pdf-btn:focus-visible {
+  outline: 2px solid #1e3739;
+  outline-offset: 2px;
+}
+
+/* Responsive (screen only, so the PDF keeps the desktop layout) */
+
+.sidebar {
+  flex-shrink: 0;
+}
+.my_photo {
+  display: block;
+}
+
+@media screen and (max-width: 1000px) {
+  .sidebar,
+  .my_photo {
+    width: 300px;
+  }
+  .contacts-container,
+  .tech-skills-container,
+  .soft-skills-container {
+    margin-left: 28px;
+    margin-right: 24px;
+  }
+  .about-me-container {
+    padding: 60px 40px 60px 48px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  body {
+    padding: 12px 0 0;
+  }
+  .lang-switcher {
+    flex-wrap: wrap;
+    margin: 0 16px 12px;
+  }
+  .wrapper {
+    flex-direction: column;
+    box-shadow: none;
+  }
+
+  /* Flatten both columns so blocks can be reordered:
+     photo, name + summary, contacts, experience, skills */
+  .sidebar,
+  .about-me-container {
+    display: contents;
+  }
+  .my_photo {
+    order: 1;
+    width: 100%;
+    height: auto;
+    max-height: 440px;
+    object-fit: cover;
+    object-position: center 25%;
+  }
+  .info-container {
+    order: 2;
+    margin: 0;
+    padding: 28px 16px 8px;
+  }
+  .contacts-container {
+    order: 3;
+    margin: 24px 0 0;
+    padding: 24px 16px;
+    background: #1e3739;
+  }
+  .work-experience-container {
+    order: 4;
+    padding: 32px 16px 16px;
+  }
+  .tech-skills-container,
+  .soft-skills-container {
+    margin: 0;
+    padding: 28px 16px 4px;
+    background: #1e3739;
+  }
+  .tech-skills-container {
+    order: 5;
+  }
+  .tech-skills-container + .tech-skills-container {
+    order: 6;
+  }
+  .soft-skills-container {
+    order: 7;
+    padding-bottom: 32px;
+  }
+
+  .proffesion {
+    margin-bottom: 8px;
+  }
+  .name {
+    font-size: 30px;
+    line-height: 1.3;
+  }
+  .description {
+    margin-top: 16px;
+  }
+  .contacts-title {
+    margin-bottom: 8px;
+  }
+  .contacts-link-type {
+    width: 84px;
+  }
+}
+
+/* Print / PDF */
+
+@page {
+  size: A4;
+  margin: 0;
+}
+@media print {
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    background: #fff;
+    padding: 0;
+  }
+  .lang-switcher {
+    display: none;
+  }
+  .wrapper {
+    max-width: none;
+    box-shadow: none;
+    min-height: 100vh;
+  }
+  .sidebar {
+    width: 280px;
+    flex-shrink: 0;
+  }
+  .my_photo {
+    width: 280px;
+  }
+  .contacts-container,
+  .tech-skills-container,
+  .soft-skills-container {
+    margin-left: 28px;
+    margin-right: 20px;
+  }
+  .contacts-container {
+    margin-top: 30px;
+    margin-left: 24px;
+    margin-right: 12px;
+  }
+  .contacts-link-type {
+    width: 72px;
+  }
+  .contacts-link {
+    font-size: 13px;
+  }
+  .about-me-container {
+    padding: 40px 40px 30px 40px;
+  }
+  .name {
+    font-size: 36px;
+    line-height: 56px;
+  }
+  .proffesion-duties {
+    margin-bottom: 18px;
+  }
+  .proffesion-title,
+  .proffesions,
+  .proffesion-duties-item {
+    break-inside: avoid;
+  }
+}
